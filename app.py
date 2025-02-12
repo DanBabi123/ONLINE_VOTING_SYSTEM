@@ -108,7 +108,7 @@ def login():
 def vote():
     if 'user_id' not in session:
         flash('You need to log in to vote.', 'warning')
-        return redirect('/login')
+        return redirect(url_for('login'))
 
     cur = mysql.connection.cursor()
     cur.execute("SELECT id, name, party_name, party_symbol FROM candidates")  
@@ -121,7 +121,7 @@ def vote():
 
         if not candidate_id:
             flash('You need to select a candidate.', 'danger')
-            return redirect('/vote')
+            return redirect(url_for('vote'))
 
         cur = mysql.connection.cursor()  
         cur.execute("SELECT * FROM votes WHERE user_id = %s", [user_id])
@@ -130,15 +130,16 @@ def vote():
 
         if vote:
             flash('You have already cast your vote.', 'danger')
-            return redirect('/vote')
+            return redirect(url_for('vote'))
 
         try:
             cur = mysql.connection.cursor()  
             cur.execute("INSERT INTO votes (user_id, candidate_id) VALUES (%s, %s)", (user_id, candidate_id))
             cur.execute("UPDATE candidates SET votes = votes + 1 WHERE id = %s", [candidate_id])
             mysql.connection.commit()
-            flash('Your vote has been submitted!', 'success')
-            return redirect('/index')  
+
+            flash('Your vote has been submitted successfully! Please logout.', 'success')
+            return redirect(url_for('logout'))  
         except Exception as e:
             print(f"Error while submitting vote: {e}")
             flash('There was an issue submitting your vote. Please try again.', 'danger')
@@ -147,14 +148,19 @@ def vote():
 
     return render_template('vote.html', candidates=candidates)
 
+
+
 @app.route('/results')
 def results():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT name, votes FROM candidates ORDER BY votes DESC") 
+    cur.execute("SELECT name, party_name, votes FROM candidates ORDER BY votes DESC") 
     results = cur.fetchall()
     cur.close()
-    winner = results[0] if results else None
+
+    winner = results[0] if results else None  
+
     return render_template('results.html', results=results, winner=winner)
+
 
 @app.route('/logout') 
 def logout():

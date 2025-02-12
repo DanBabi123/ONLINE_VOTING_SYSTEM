@@ -3,36 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results - Online Voting System</title>
+    <title>Election Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <style>
-        h2{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
 </head>
 <body>
-    <h1>Election Results</h1>
+    <h2>Election Results</h2>
 
-    {% if winner %}
-        <h2>🏆 Winner: {{ winner[0] }} with {{ winner[1] }} votes! 🎉</h2>
+    {% if results %}
+        <table border="1">
+            <tr>
+                <th>Candidate Name</th>
+                <th>Party Name</th>
+                <th>Votes</th>
+            </tr>
+            {% for candidate in results %}
+            <tr>
+                <td>{{ candidate.name }}</td>
+                <td>{{ candidate.party_name }}</td>
+                <td>{{ candidate.votes }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Winner:</h3>
+        {% if winner %}
+            <p><strong>{{ winner.name }}</strong> from <strong>{{ winner.party_name }}</strong> with <strong>{{ winner.votes }}</strong> votes!</p>
+        {% else %}
+            <p>No winner yet.</p>
+        {% endif %}
     {% else %}
-        <h2>No votes recorded yet.</h2>
+        <p>No votes have been cast yet.</p>
     {% endif %}
 
-    <table>
-        <tr>
-            <th>Candidate</th>
-            <th>Votes</th>
-        </tr>
-        {% for result in results %}
-        <tr>
-            <td>{{ result[0] }}</td>
-            <td>{{ result[1] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <a href="{{ url_for('index') }}">Back to Home</a>
 </body>
 </html>
