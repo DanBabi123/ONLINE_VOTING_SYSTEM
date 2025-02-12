@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote - Online Voting System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vote for Your Candidate</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        {% if candidates %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Candidate Name</th>
+                        <th>Party Name</th>
+                        <th>Party Symbol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for candidate in candidates %}
+                        <tr>
+                            <td>
+                                <input type="radio" id="candidate_{{ candidate.id }}" name="candidate" value="{{ candidate.id }}" required>
+                            </td>
+                            <td>
+                                <label for="candidate_{{ candidate.id }}">{{ candidate.name }}</label>
+                            </td>
+                            <td>{{ candidate.party_name }}</td>
+                            <td>
+                                <img src="{{ url_for('static', filename='uploads/' + candidate.party_symbol) }}" alt="{{ candidate.party_name }} symbol" style="width: 50px; height: auto;">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit">Submit Vote</button>
+        {% else %}
+            <p>No candidates available for voting.</p>
+        {% endif %}
+    </form>
+    
+</body>
+</html>
