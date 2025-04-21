@@ -4,132 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-    margin: 50px;
-}
-
-.login-container {
-    width: 300px;
-    margin: auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.error {
-    color: red;
-    font-size: 14px;
-}
-
-.messages p {
-    padding: 10px;
-    border-radius: 5px;
-    margin: 10px 0;
-}
-
-.success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.danger {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-.warning {
-    background-color: #fff3cd;
-    color: #856404;
-}
-
-.info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-}
-
-    </style>
     
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .register-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 40px 30px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #00d9ff;
+            font-size: 28px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form_group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #eee;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        select {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #000;
+        }
+
+        .form-actions {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button[type="submit"] {
+            padding: 12px 30px;
+            background-color: #00d9ff;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #009ec3;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+            grid-column: span 2;
+        }
+
+        .login-link a {
+            color: #00d9ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions,
+            .login-link {
+                grid-column: span 1;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="register-container">
-        <h2>Register-Online Voting System</h2>
-        
+        <h2>Register</h2>
         <form action="/register" method="post">
-            <div id="error-message" class="error"></div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
+            <div class="form_group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form_group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form_group">
+                <label for="student_id">Student ID</label>
+                <input type="text" id="student_id" name="student_id" required>
+            </div>
+            <div class="form_group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <div class="form_group">
+                <label for="academic_year">Year</label>
+                <input type="text" id="academic_year" name="academic_year" required>
+            </div>
+            <div class="form_group">
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+            <div class="form_group">
+                <label for="dob">Date Of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form_group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form_group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form_group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </div>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <div class="form-actions">
+                <button type="submit">Register</button>
+            </div>
 
-            <label for="student_id">Student ID</label>
-            <input type="text" id="student_id" name="student_id" required>
-
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" name="phone" required>
-
-            <label for="class">Year</label>
-            <input type="text" id="academic_year" name="academic_year" required>
-
-            <label for="department">Department</label>
-            <input type="text" id="department" name="department" required>
-
-            <label for="dob">Date Of Birth</label>
-            <input type="date" id="dob" name="dob" required>
-
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender" required>
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-
-            <label for="confirm_password">Confirm Password</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-
-            <button type="submit">Register</button>
+            <div class="login-link">
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </div>
         </form>
-        <p>Already have an account? <a href="/login">Login</a></p>
+
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <script type="text/javascript">
-                alert("{{ messages[0] }}");  
-            </script>
-        {% endif %}
-    {% endwith %}
+            {% if messages %}
+                <script type="text/javascript">
+                    alert("{{ messages[0] }}");
+                </script>
+            {% endif %}
+        {% endwith %}
     </div>
-    
 </body>
 </html>

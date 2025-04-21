@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
+
 app = Flask(__name__)
 
 UPLOAD_FOLDER = 'static/uploads'

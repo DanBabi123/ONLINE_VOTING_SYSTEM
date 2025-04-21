@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,13 +7,11 @@ body {
     line-height: 1.6;
 }
 
-
 h1 {
     color: #444;
     text-align: center;
     margin: 20px 0;
 }
-
 
 a {
     color: #0066cc;
@@ -26,28 +23,38 @@ a:hover {
     text-decoration: underline;
 }
 
-
 form {
-    max-width: 500px;
+    max-width: 800px;
     margin: 20px auto;
     padding: 40px;
     background: #fff;
-    border: 1px solid #ccc;
-    border-radius:20px ;
+    border: 5px double #ccc;
+    border-radius: 20px;
+    animation-name: demo;
+    animation-duration: 120s;
+    box-shadow: 10px 10px 10px gray;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
 }
 
 label {
     display: block;
-    margin: 10px 0 5px;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
 input[type="text"],
 input[type="password"],
-button {
+input[type="email"],
+input[type="date"],
+select {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -57,12 +64,58 @@ button {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 30px;
+    transition: 0.3s;
 }
 
 button:hover {
     background-color: #005bb5;
 }
 
+.form-actions {
+    grid-column: span 2;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        grid-column: span 1;
+    }
+}
+
+@keyframes demo {
+    0% { border-color: #721c24; box-shadow: 5px 5px 5px rgb(102, 54, 54); }
+    10% { border-color: black; box-shadow: 5px 5px 5px rgb(203, 120, 26); }
+    20% { border-color: rgb(180, 28, 28); box-shadow: 5px 5px 5px rgb(154, 194, 22); }
+    30% { border-color: rgb(202, 79, 23); box-shadow: 5px 5px 5px rgb(3, 55, 70); }
+    40% { border-color: rgb(10, 108, 130); box-shadow: 5px 5px 5px rgb(13, 51, 218); }
+    50% { border-color: rgb(55, 33, 179); box-shadow: 5px 5px 5px rgb(8, 2, 34); }
+    60% { border-color: rgb(191, 19, 114); box-shadow: 5px 5px 5px rgb(111, 6, 50); }
+    70% { border-color: rgb(30, 173, 61); box-shadow: 5px 5px 5px rgb(24, 1, 20); }
+    80% { border-color: rgb(108, 76, 190); box-shadow: 5px 5px 5px rgb(82, 76, 165); }
+    90% { border-color: rgb(48, 165, 79); box-shadow: 5px 5px 5px rgba(143, 18, 136, 0.344); }
+    100% { border-color: rgb(226, 33, 139); box-shadow: 5px 5px 5px rgb(19, 204, 53); }
+}
+
+.flash {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.flash.success { background-color: #d4edda; color: #155724; }
+.flash.danger  { background-color: #f8d7da; color: #721c24; }
+.flash.warning { background-color: #fff3cd; color: #856404; }
+.flash.info    { background-color: #d1ecf1; color: #0c5460; }
 
 table {
     width: 80%;
@@ -76,39 +129,6 @@ th, td {
     border: 1px solid #ddd;
 }
 
-th {
-    background-color: #f2f2f2;
-}
-
 tr:hover {
     background-color: #f9f9f9;
-}
-
-
-.flash {
-    width: 80%;
-    margin: 10px auto;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.flash.success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.flash.danger {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-.flash.warning {
-    background-color: #fff3cd;
-    color: #856404;
-}
-
-.flash.info {
-    background-color: #d1ecf1;
-    color: #0c5460;
 }
