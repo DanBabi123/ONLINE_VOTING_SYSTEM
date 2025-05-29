@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email verification</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background-color: #eef1f4;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 200px;
+        }
+        .container{
+            max-width: 400px;
+            margin: 60px,auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        h2{
+            text-align: center;
+            color:#333;
+            margin-bottom: 15px;
+        }
+        p{
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+        }
+        input{
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button{
+            width: 100%;
+            padding: 10px;
+            background: #282828;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Email Verification</h2>
+    <p>We have sent a 6-digit OTP to your Email</p>
+    <form method="POST" action="/login_otp">
+        <input type="text" name="otp" placeholder="Enter OTP" required><br>
+        <button type="submit">Verify OTP</button>
+    </form>
+</div>
+</body>
+</html>
